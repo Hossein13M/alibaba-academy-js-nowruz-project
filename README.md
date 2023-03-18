@@ -21,7 +21,7 @@ Write down a function that gets an array of number from the user and then sort t
 
 ## Challenge 6:
 Write down a function that gets a number from the user and then print a pyramid consisting of "*" based on the user's input number.
-For example, if the user enters 3 we need to log the following on the console:
+For example, if the user enters 5 we need to log the following on the console:
 
 ![dastan image](./dastan.jpg)
 
