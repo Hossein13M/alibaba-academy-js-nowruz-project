@@ -25,8 +25,9 @@ function warehouseStock() {
 }
 
 function productStock(productId) {
+  if (!isTypeValid(productId, "number")) return "id should be a number!";
   for (const product of warehouse) {
-    if (product.id == productId) {
+    if (product.id === productId) {
       return product;
     }
   }
@@ -40,13 +41,12 @@ function addNewProduct(product) {
 }
 
 function sellProduct(productId, count = 1) {
+  if (!isTypeValid(productId, "number")) return "id should be a number!";
+  if (!isTypeValid(count, "number")) return "count must be number!";
+  if (!isInRange(count, 0)) return "count is out of range!";
   for (const product of warehouse) {
-    if (product.id == productId && product.enable && product.count >= count) {
+    if (product.id === productId && product.enable && product.count >= count) {
       product.count -= count;
-      console.log("count", count, "price", product.price, {
-        count,
-        price: product.price,
-      });
       product.sell.push({ count, price: product.price });
       if (product.count == 0) product.enable = false;
       return `${count} ${product.name} sold!`;
@@ -64,9 +64,14 @@ function availableProduct() {
 }
 
 function changeProductMode(productId, enable) {
+  if (!isTypeValid(productId, "number")) return "id should be a number!";
+  if (typeof enable !== "undefined" && !isTypeValid(enable, "boolean"))
+    return "enable should be boolean";
   for (const product of warehouse) {
-    if (product.id == productId) {
-      enable ? (product.enable = enable) : (product.enable = !product.enable);
+    if (product.id === productId) {
+      enable !== undefined
+        ? (product.enable = enable)
+        : (product.enable = !product.enable);
       return `${product.name} ${product.enable ? "enabled" : "disabled"}!`;
     }
   }
@@ -74,8 +79,11 @@ function changeProductMode(productId, enable) {
 }
 
 function changeProductCount(productId, count) {
+  if (!isTypeValid(productId, "number")) return "id should be a number!";
+  if (!isTypeValid(count, "number")) return "count must be number!";
+  if (!isInRange(count, 0)) return "count is out of range!";
   for (const product of warehouse) {
-    if (product.id == productId) {
+    if (product.id === productId) {
       product.count = count;
       return `count of ${product.name} changed to ${count}!`;
     }
@@ -84,8 +92,9 @@ function changeProductCount(productId, count) {
 }
 
 function findProduct(productId) {
+  if (!isTypeValid(productId, "number")) return "id should be a number!";
   for (const product of warehouse) {
-    if (product.id == productId) {
+    if (product.id === productId) {
       return true;
     }
   }
@@ -93,11 +102,12 @@ function findProduct(productId) {
 }
 
 function editProduct(productId, newParams) {
-  console.error("warning: this function can change or delete important data!");
+  if (!isTypeValid(productId, "number")) return "id should be a number!";
+  console.warn("warning: this function can change or delete important data!");
   let { id, name, price, count, sell, enable } = newParams;
   if (id) return "you can't change id";
   for (const product of warehouse) {
-    if (product.id == productId) {
+    if (product.id === productId) {
       if (name) product.name = name;
       if (price) product.price = price;
       if (count) product.count = count;
@@ -109,7 +119,7 @@ function editProduct(productId, newParams) {
   return `product ${productId} is not available!`;
 }
 
-function calcSoldProductsOfWarehousePrice() {
+function calcSoldProductsOfWarehouseValue() {
   let total = 0;
   for (const product of warehouse) {
     for (const soldData of product.sell) {
@@ -119,10 +129,11 @@ function calcSoldProductsOfWarehousePrice() {
   return total;
 }
 
-function calcSoldProductPrice(productId) {
+function calcSoldProductValue(productId) {
+  if (!isTypeValid(productId, "number")) return "id should be a number!";
   let total = 0;
   for (const product of warehouse) {
-    if (product.id == productId) {
+    if (product.id === productId) {
       for (const soldData of product.sell) {
         total += soldData.price * soldData.count;
       }
@@ -140,8 +151,15 @@ function calcValueOfWarehouse() {
   return total;
 }
 
-// test case
+function isTypeValid(value, trueType) {
+  if (typeof value === trueType) return true;
+  return false;
+}
+function isInRange(value, min = Infinity, max = Infinity) {
+  return value >= min && value <= max;
+}
 
+// test case
 console.log(addNewProduct(Product(1, "product1", 100, 100)));
 console.log(addNewProduct(Product(1, "product1", 100, 100)));
 console.log(addNewProduct(Product(2, "product2", 10, 5, [], false)));
@@ -157,14 +175,15 @@ console.log(addNewProduct(Product(6, "product6", 100, 100)));
 console.log("product 2:", productStock(2));
 console.log("requesting 5 item of product 2: ", sellProduct(2, 5));
 console.log("product 5:", productStock(5));
-console.log("requesting 5 item of product 2: ", sellProduct(5, 5));
-console.log("requesting 1 item of product 2: ", sellProduct(5, 1));
-console.log("requesting 1 item of product 2: ", sellProduct(5, 1));
+console.log("requesting 5 item of product 5: ", sellProduct(5, 5));
+console.log("requesting 1 item of product 5: ", sellProduct(5, 1));
+console.log("requesting 1 item of product 5: ", sellProduct(5, 1));
 console.log("requesting 5 item of product 1: ", sellProduct(1, 5));
 console.log(editProduct(1, { price: 30 }));
 console.log("requesting 10 item of product 1: ", sellProduct(1, 10));
 console.log(changeProductMode(4, false));
 console.log(changeProductMode(4, true));
+console.log(changeProductMode(4, "true"));
 console.log(changeProductMode(4));
 console.log("available products:", availableProduct());
 console.log(changeProductCount(8, 10));
@@ -173,8 +192,8 @@ console.log(editProduct(3, { name: "product-3", price: 20, count: 5 }));
 console.log(editProduct(3, { id: 10, name: "product-10" }));
 console.log(
   "price of all the items that have been sold: ",
-  calcSoldProductsOfWarehousePrice()
+  calcSoldProductsOfWarehouseValue()
 );
-console.log("price of product1 that have been sold: ", calcSoldProductPrice(1));
+console.log("price of product1 that have been sold: ", calcSoldProductValue(1));
 console.log("warehouse's value: ", calcValueOfWarehouse());
-// console.log(warehouse);
+console.log(warehouse);
