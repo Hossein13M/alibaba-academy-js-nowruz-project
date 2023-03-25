@@ -10,12 +10,12 @@ function maxMin(arr) {
 }
 
 function isArrValid(arr) {
-  if (Array.isArray(arr) && arr.length != 0) {
+  if (Array.isArray(arr) && arr.length !== 0) {
     for (const iterator of arr) {
       if (typeof iterator !== "number") return false;
     }
   }
-  return Array.isArray(arr) && arr.length != 0;
+  return Array.isArray(arr) && arr.length !== 0;
 }
 
 // test case for get max and min value of arrays

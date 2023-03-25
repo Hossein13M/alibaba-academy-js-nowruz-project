@@ -16,7 +16,7 @@ function isColorValid(colorCode) {
 
 function decToHex(colorCode) {
   const hexCode = [];
-  while (colorCode != 0) {
+  while (colorCode !== 0) {
     let remainder = colorCode % 16;
     switch (remainder) {
       case 10:
@@ -43,7 +43,7 @@ function decToHex(colorCode) {
     }
     colorCode = Math.floor(colorCode / 16);
   }
-  while (hexCode.length != 2) {
+  while (hexCode.length !== 2) {
     hexCode.unshift(0);
   }
   return hexCode.join("");
