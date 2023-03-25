@@ -3,9 +3,9 @@
 function primeNumbersBruteForce(n) {
   if (typeof n !== "number") return "bad request!";
   const primeNumbers = [];
-  if (n >= 2) primeNumbers.push(2);
+  n >= 2 && primeNumbers.push(2);
   for (let index = 3; index <= n; index += 2) {
-    if (isPrime(index)) primeNumbers.push(index);
+    isPrime(index) && primeNumbers.push(index);
   }
   return primeNumbers;
 }
@@ -45,9 +45,7 @@ function primeNumbers(n) {
     }
   }
   for (let index = 2; index < numbers.length; index++) {
-    if (numbers[index]) {
-      primeNumbers.push(index);
-    }
+    numbers[index] && primeNumbers.push(index);
   }
   return primeNumbers;
 }
