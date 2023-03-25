@@ -167,33 +167,27 @@ console.log(addNewProduct(Product(3, "product3", 110, 10)));
 console.log(addNewProduct(Product(4, "product4", 120, 10)));
 console.log(addNewProduct(Product(5, "product5", 150, 1)));
 console.log(addNewProduct(Product(7, "product7", 150, 0)));
-console.log(
-  "count of all the items in the warehouse combined: ",
-  warehouseStock()
-);
+console.log(`count of all the items in the warehouse combined: ${warehouseStock()}`);
 console.log(addNewProduct(Product(6, "product6", 100, 100)));
-console.log("product 2:", productStock(2));
-console.log("requesting 5 item of product 2: ", sellProduct(2, 5));
-console.log("product 5:", productStock(5));
-console.log("requesting 5 item of product 5: ", sellProduct(5, 5));
-console.log("requesting 1 item of product 5: ", sellProduct(5, 1));
-console.log("requesting 1 item of product 5: ", sellProduct(5, 1));
-console.log("requesting 5 item of product 1: ", sellProduct(1, 5));
+console.log(`product 2: ${productStock(2)}`);
+console.log(`requesting 5 item of product 2: ${sellProduct(2, 5)}`);
+console.log(`product 5: ${productStock(5)}`);
+console.log(`requesting 5 item of product 5:  ${sellProduct(5, 5)}`);
+console.log(`requesting 1 item of product 5: ${sellProduct(5, 1)}`);
+console.log(`requesting 1 item of product 5: ${sellProduct(5, 1)}`);
+console.log(`requesting 5 item of product 1: ${sellProduct(1, 5)}`);
 console.log(editProduct(1, { price: 30 }));
-console.log("requesting 10 item of product 1: ", sellProduct(1, 10));
+console.log(`requesting 10 item of product 1: ${sellProduct(1, 10)}`);
 console.log(changeProductMode(4, false));
 console.log(changeProductMode(4, true));
 console.log(changeProductMode(4, "true"));
 console.log(changeProductMode(4));
-console.log("available products:", availableProduct());
+console.log(`available products: ${availableProduct()}`);
 console.log(changeProductCount(8, 10));
 console.log(changeProductCount(3, 10));
 console.log(editProduct(3, { name: "product-3", price: 20, count: 5 }));
 console.log(editProduct(3, { id: 10, name: "product-10" }));
-console.log(
-  "price of all the items that have been sold: ",
-  calcSoldProductsOfWarehouseValue()
-);
-console.log("price of product1 that have been sold: ", calcSoldProductValue(1));
-console.log("warehouse's value: ", calcValueOfWarehouse());
+console.log(`price of all the items that have been sold: ${calcSoldProductsOfWarehouseValue()}`);
+console.log(`price of product1 that have been sold: ${calcSoldProductValue(1)}`);
+console.log(`warehouse's value: ${calcValueOfWarehouse()}`);
 console.log(warehouse);
