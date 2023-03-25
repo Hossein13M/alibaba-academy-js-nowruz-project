@@ -27,9 +27,9 @@ function calcAge(birthDate) {
   return age;
 }
 
-const isDateValid = function (date) {
+function isDateValid(date) {
   return date instanceof Date && date <= new Date();
-};
+}
 
 // test case for age calculation
 console.log(calcAge());

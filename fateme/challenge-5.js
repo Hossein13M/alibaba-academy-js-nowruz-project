@@ -9,14 +9,14 @@ function insertionSort(arr) {
   return arr;
 }
 
-const isArrValid = function (arr) {
+function isArrValid(arr) {
   if (Array.isArray(arr) && arr.length != 0) {
     for (const iterator of arr) {
       if (typeof iterator !== "number") return false;
     }
   }
   return Array.isArray(arr) && arr.length != 0;
-};
+}
 
 // test case
 console.log(insertionSort(false));

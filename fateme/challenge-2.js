@@ -10,11 +10,11 @@ function convertRGBtoHex(...args) {
   return result;
 }
 
-const isColorValid = function (colorCode) {
+function isColorValid(colorCode) {
   return typeof colorCode === "number" && colorCode >= 0 && colorCode <= 255;
-};
+}
 
-const decToHex = function (colorCode) {
+function decToHex(colorCode) {
   const hexCode = [];
   while (colorCode != 0) {
     let remainder = colorCode % 16;
@@ -47,7 +47,7 @@ const decToHex = function (colorCode) {
     hexCode.unshift(0);
   }
   return hexCode.join("");
-};
+}
 
 // test case for converting RGB to HEX format
 console.log(
