@@ -1,17 +1,17 @@
 function calcAge(birthDate) {
   if (!isDateValid(birthDate)) return "bad request!";
-  let birthDateExtraction = {
+  const birthDateExtraction = {
     year: birthDate.getYear(),
     month: birthDate.getMonth(),
     day: birthDate.getDate(),
   };
   let now = new Date();
-  let currentDate = {
+  const currentDate = {
     year: now.getYear(),
     month: now.getMonth(),
     day: now.getDate(),
   };
-  let age = {
+  const age = {
     year: currentDate.year - birthDateExtraction.year,
     month: currentDate.month - birthDateExtraction.month,
     day: currentDate.day - birthDateExtraction.day,

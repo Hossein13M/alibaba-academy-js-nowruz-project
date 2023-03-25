@@ -15,7 +15,7 @@ const isColorValid = function (colorCode) {
 };
 
 const decToHex = function (colorCode) {
-  let hexCode = [];
+  const hexCode = [];
   while (colorCode != 0) {
     let remainder = colorCode % 16;
     switch (remainder) {

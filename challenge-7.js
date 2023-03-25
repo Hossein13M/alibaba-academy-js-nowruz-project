@@ -1,4 +1,4 @@
-let warehouse = Warehouse([]);
+const warehouse = Warehouse([]);
 
 function Product(id, name, price, count, sell = [], enable = true) {
   if (count == 0) enable = false;
