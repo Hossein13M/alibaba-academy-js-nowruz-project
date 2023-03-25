@@ -12,7 +12,7 @@ function insertionSort(arr) {
 const isArrValid = function (arr) {
   if (Array.isArray(arr) && arr.length != 0) {
     for (const iterator of arr) {
-      if (typeof iterator != "number") return false;
+      if (typeof iterator !== "number") return false;
     }
   }
   return Array.isArray(arr) && arr.length != 0;

@@ -11,7 +11,7 @@ function convertRGBtoHex(...args) {
 }
 
 const isColorValid = function (colorCode) {
-  return typeof colorCode == "number" && colorCode >= 0 && colorCode <= 255;
+  return typeof colorCode === "number" && colorCode >= 0 && colorCode <= 255;
 };
 
 const decToHex = function (colorCode) {

@@ -1,7 +1,7 @@
 // BruteForce O(n^2)
 
 function primeNumbersBruteForce(n) {
-  if (typeof n != "number") return "bad request!";
+  if (typeof n !== "number") return "bad request!";
   let primeNumbers = [];
   if (n >= 2) primeNumbers.push(2);
   for (let index = 3; index <= n; index += 2) {
@@ -33,7 +33,7 @@ console.timeEnd("BruteForce");
 
 // another solution for generating prime numbers with marking numbers O(n*log(n))
 function primeNumbers(n) {
-  if (typeof n != "number") return "bad request!";
+  if (typeof n !== "number") return "bad request!";
   let primeNumbers = [];
   let numbers = Array(n + 1);
   numbers.fill(true);
