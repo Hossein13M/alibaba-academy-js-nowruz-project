@@ -1,7 +1,7 @@
 const warehouse = Warehouse([]);
 
 function Product(id, name, price, count, sell = [], enable = true) {
-  if (count == 0) enable = false;
+  if (count === 0) enable = false;
   return {
     id,
     name,
@@ -48,7 +48,7 @@ function sellProduct(productId, count = 1) {
     if (product.id === productId && product.enable && product.count >= count) {
       product.count -= count;
       product.sell.push({ count, price: product.price });
-      if (product.count == 0) product.enable = false;
+      if (product.count === 0) product.enable = false;
       return `${count} ${product.name} sold!`;
     }
   }

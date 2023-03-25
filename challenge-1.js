@@ -12,7 +12,7 @@ function primeNumbersBruteForce(n) {
 
 function isPrime(n) {
   for (let index = 2; index <= Math.sqrt(n); index++) {
-    if (n % index == 0) return false;
+    if (n % index === 0) return false;
   }
   return true;
 }
