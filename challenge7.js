@@ -18,11 +18,11 @@ function getTotalCount() {
         (totalCount, product) => totalCount + product.count,0)
     }`);
 }
-function getNextProductId() {
+function generateNextProductId() {
     return warehouse.products.length + 1;
 }
 function createNewItem(name, count, price, enabled) {
-    const id = getNextProductId();
+    const id = generateNextProductId();
     const newItem = { id, name, count, price, enabled };
     warehouse.products.push(newItem);
     console.log("New item created!");
