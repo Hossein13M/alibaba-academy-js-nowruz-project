@@ -27,8 +27,7 @@ function isArrEmpty(arr) {
 }
 
 function isTypeValid(value, trueType) {
-  if (typeof value === trueType) return true;
-  return false;
+  return typeof value === trueType
 }
 
 // test case

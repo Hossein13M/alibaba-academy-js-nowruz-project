@@ -142,8 +142,7 @@ function calcValueOfWarehouse() {
 }
 
 function isTypeValid(value, trueType) {
-  if (typeof value === trueType) return true;
-  return false;
+  return typeof value === trueType
 }
 
 function isInRange(value, min = Infinity, max = Infinity) {

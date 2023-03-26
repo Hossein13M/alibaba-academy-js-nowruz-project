@@ -16,8 +16,7 @@ function pyramid(n = 5) {
 }
 
 function isTypeValid(value, trueType) {
-  if (typeof value === trueType) return true;
-  return false;
+  return typeof value === trueType
 }
 
 pyramid();
