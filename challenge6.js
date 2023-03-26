@@ -18,8 +18,14 @@ async function printPyramid() {
   const num = await getNumber();
   let pyramid = "";
   for (let i = 1; i <= num; i++) {
-    let spaces = " ".repeat(num - i);
-    let stars = "*".repeat(2 * i - 1);
+    let spaces = "";
+    for (let j = 1; j <= num - i; j++) {
+      spaces += " ";
+    }
+    let stars = "";
+    for (let k = 1; k <= 2 * i - 1; k++) {
+      stars += "*";
+    }
     pyramid += spaces + stars + "\n";
   }
   console.log(pyramid);
