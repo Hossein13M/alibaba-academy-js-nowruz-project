@@ -12,9 +12,6 @@ function insertionSort(arr) {
 function validationCheck(arr) {
   if (!isArrTypeValid(arr)) return false;
   if (isArrEmpty(arr)) return false;
-  for (const iterator of arr) {
-    if (!isTypeValid(iterator, "number")) return false;
-  }
   return true;
 }
 
@@ -26,12 +23,7 @@ function isArrEmpty(arr) {
   return arr.length === 0;
 }
 
-function isTypeValid(value, trueType) {
-  return typeof value === trueType
-}
-
 // test case
 console.log(insertionSort(false));
 console.log(insertionSort(""));
-console.log(insertionSort([""]));
 console.log(insertionSort([10, 11, 30, 33, 90, 99, -1, 20, 22]));

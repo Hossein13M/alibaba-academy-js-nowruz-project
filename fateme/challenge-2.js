@@ -45,7 +45,6 @@ function decToHex(colorCode) {
 function validationCheck(args) {
   if (!isCountOfColorsThree(args)) return false;
   for (const colorNumber of args) {
-    if (!isTypeValid(colorNumber, "number")) return false;
     if (!isColorNumberInRange(colorNumber)) return false;
   }
   return true;
@@ -56,17 +55,24 @@ function isCountOfColorsThree(args) {
   return false;
 }
 
-function isTypeValid(value, trueType) {
-  return typeof value === trueType
-}
-
 function isColorNumberInRange(colorNumber) {
   return colorNumber >= 0 && colorNumber <= 255;
 }
 
 // test case for converting RGB to HEX format
-console.log(`HEX code converted from RGB(0, 0, 0, 0): ${convertRGBtoHex(0, 0, 0, 0)}`);
-console.log(`HEX code converted from RGB('0', 0, 0): ${convertRGBtoHex("0", 0, 0)}`);
-console.log(`HEX code converted from RGB(255, 255, 256): ${convertRGBtoHex(255, 255, 256)}`);
-console.log(`HEX code converted from RGB(0, 0, 0): ${convertRGBtoHex(0, 0, 0)}`);
-console.log(`HEX code converted from RGB(25, 56, 123): ${convertRGBtoHex(25, 56, 123)}`);
+console.log(
+  `HEX code converted from RGB(0, 0, 0, 0): ${convertRGBtoHex(0, 0, 0, 0)}`
+);
+console.log(
+  `HEX code converted from RGB(255, 255, 256): ${convertRGBtoHex(
+    255,
+    255,
+    256
+  )}`
+);
+console.log(
+  `HEX code converted from RGB(0, 0, 0): ${convertRGBtoHex(0, 0, 0)}`
+);
+console.log(
+  `HEX code converted from RGB(25, 56, 123): ${convertRGBtoHex(25, 56, 123)}`
+);

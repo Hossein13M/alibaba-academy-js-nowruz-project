@@ -30,7 +30,7 @@ function calcAge(birthDate) {
 function validationCheck(date) {
   if (!isDateTypeValid(date)) return false;
   if (!isDateOlderThanNow(date)) return false;
-  return true
+  return true;
 }
 
 function isDateTypeValid(date) {
