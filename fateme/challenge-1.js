@@ -1,7 +1,7 @@
 // BruteForce O(n^2)
 
 function primeNumbersBruteForce(n) {
-  if (typeof n !== "number") return "bad request!";
+  if (!isTypeValid(n, "number")) return "bad request!";
   const primeNumbers = [];
   n >= 2 && primeNumbers.push(2);
   for (let index = 3; index <= n; index += 2) {
@@ -17,8 +17,12 @@ function isPrime(n) {
   return true;
 }
 
-// test case for prime numbers
+function isTypeValid(value, trueType) {
+  if (typeof value === trueType) return true;
+  return false;
+}
 
+// test case for prime numbers
 console.log(primeNumbersBruteForce("2"));
 console.log(`[BruteForce]the prime numbers between 0 and 2: ${primeNumbersBruteForce(2)}`);
 console.time("BruteForce");
@@ -27,7 +31,7 @@ console.timeEnd("BruteForce");
 
 // another solution for generating prime numbers with marking numbers O(n*log(n))
 function primeNumbers(n) {
-  if (typeof n !== "number") return "bad request!";
+  if (!isTypeValid(n, "number")) return "bad request!";
   const primeNumbers = [];
   const numbers = Array(n + 1);
   numbers.fill(true);
@@ -45,7 +49,6 @@ function primeNumbers(n) {
 }
 
 // test case for prime numbers
-
 console.log(`the prime numbers between 0 and 2: ${primeNumbers(2)}`);
 console.time("other way");
 console.log(`the prime numbers between 0 and 100: ${primeNumbers(100)}`);

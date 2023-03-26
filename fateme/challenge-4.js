@@ -1,5 +1,5 @@
 function maxMin(arr) {
-  if (!isArrValid(arr)) return "bad request!";
+  if (!validationCheck(arr)) return "bad request!";
   let min = arr[0];
   let max = arr[0];
   for (const iterator of arr) {
@@ -9,24 +9,31 @@ function maxMin(arr) {
   return JSON.stringify({ min, max });
 }
 
-function isArrValid(arr) {
-  if (Array.isArray(arr) && arr.length !== 0) {
-    for (const iterator of arr) {
-      if (typeof iterator !== "number") return false;
-    }
+function validationCheck(arr) {
+  if (!isArrTypeValid(arr)) return false;
+  if (isArrEmpty(arr)) return false;
+  for (const iterator of arr) {
+    if (!isTypeValid(iterator, "number")) return false;
   }
-  return Array.isArray(arr) && arr.length !== 0;
+  return true;
+}
+
+function isArrTypeValid(arr) {
+  return Array.isArray(arr);
+}
+
+function isArrEmpty(arr) {
+  return arr.length === 0;
+}
+
+function isTypeValid(value, trueType) {
+  if (typeof value === trueType) return true;
+  return false;
 }
 
 // test case for get max and min value of arrays
 console.log(maxMin());
 console.log(maxMin(""));
 console.log(maxMin([""]));
-console.log(
-  "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
-  maxMin([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-);
-console.log(
-  "[10, 11, 30, 33, 90, 99, -1, 20, 22]",
-  maxMin([10, 11, 30, 33, 90, 99, -1, 20, 22])
-);
+console.log(`[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]: ${maxMin([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}`);
+console.log(`[10, 11, 30, 33, 90, 99, -1, 20, 22]: ${maxMin([10, 11, 30, 33, 90, 99, -1, 20, 22])}`);

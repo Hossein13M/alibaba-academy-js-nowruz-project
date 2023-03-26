@@ -1,5 +1,5 @@
 function insertionSort(arr) {
-  if (!isArrValid(arr)) return "bad request!";
+  if (!validationCheck(arr)) return "bad request!";
   let j;
   for (let i = 1; i < arr.length; i++) {
     var temp = arr[i];
@@ -9,13 +9,26 @@ function insertionSort(arr) {
   return JSON.stringify(arr);
 }
 
-function isArrValid(arr) {
-  if (Array.isArray(arr) && arr.length !== 0) {
-    for (const iterator of arr) {
-      if (typeof iterator !== "number") return false;
-    }
+function validationCheck(arr) {
+  if (!isArrTypeValid(arr)) return false;
+  if (isArrEmpty(arr)) return false;
+  for (const iterator of arr) {
+    if (!isTypeValid(iterator, "number")) return false;
   }
-  return Array.isArray(arr) && arr.length !== 0;
+  return true;
+}
+
+function isArrTypeValid(arr) {
+  return Array.isArray(arr);
+}
+
+function isArrEmpty(arr) {
+  return arr.length === 0;
+}
+
+function isTypeValid(value, trueType) {
+  if (typeof value === trueType) return true;
+  return false;
 }
 
 // test case

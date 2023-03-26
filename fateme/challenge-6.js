@@ -1,15 +1,25 @@
 function pyramid(n = 5) {
-  for (let index = 1; index <= n; index++) {
-    const line = []
-    for (let j = 1; j <= n - index; j++) {
-      line.push(" ")
+  if (isTypeValid(n, "number")) {
+    for (let index = 1; index <= n; index++) {
+      const line = []
+      for (let j = 1; j <= n - index; j++) {
+        line.push(" ")
+      }
+      for (let k = 1; k <= 2 * index - 1; k++) {
+        line.push("*")
+      }
+      console.log(line.join(""));
     }
-    for (let k = 1; k <= 2 * index - 1; k++) {
-      line.push("*")
-    }
-    console.log(line.join(""));
+  } else {
+    console.log("bad request!")
   }
 }
 
+function isTypeValid(value, trueType) {
+  if (typeof value === trueType) return true;
+  return false;
+}
+
 pyramid();
+pyramid("5");
 pyramid(10);
