@@ -7,7 +7,7 @@ function primeNumbersBruteForce(n) {
   for (let index = 3; index <= n; index += 2) {
     isPrime(index) && primeNumbers.push(index);
   }
-  return primeNumbers;
+  return JSON.stringify(primeNumbers);
 }
 
 function isPrime(n) {
@@ -41,7 +41,7 @@ function primeNumbers(n) {
   for (let index = 2; index < numbers.length; index++) {
     numbers[index] && primeNumbers.push(index);
   }
-  return primeNumbers;
+  return JSON.stringify(primeNumbers);
 }
 
 // test case for prime numbers

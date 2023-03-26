@@ -6,7 +6,7 @@ function maxMin(arr) {
     if (iterator < min) min = iterator;
     else if (iterator > max) max = iterator;
   }
-  return { min, max };
+  return JSON.stringify({ min, max });
 }
 
 function isArrValid(arr) {
@@ -23,10 +23,10 @@ console.log(maxMin());
 console.log(maxMin(""));
 console.log(maxMin([""]));
 console.log(
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
   maxMin([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 );
 console.log(
-  [10, 11, 30, 33, 90, 99, -1, 20, 22],
+  "[10, 11, 30, 33, 90, 99, -1, 20, 22]",
   maxMin([10, 11, 30, 33, 90, 99, -1, 20, 22])
 );
