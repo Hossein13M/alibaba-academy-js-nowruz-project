@@ -4,8 +4,8 @@ function getMaxMin(...args) {
     if (args.length === 0){
         return ("error : empty array !")
     }
-    var min = Infinity;
-    var max = -Infinity;
+    var min = args[0];
+    var max = args[0];
     console.log(`iterating the array : [${args}]`)
     for (var num of args){
         if(num > max) {
