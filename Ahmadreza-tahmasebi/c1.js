@@ -12,7 +12,7 @@ function printAllPrimes(){
                 break;
             }
         }
-        if(j == i){
+        if(j === i){
             console.log(`${i} is prime !`);
             primes.push(i);
         }
