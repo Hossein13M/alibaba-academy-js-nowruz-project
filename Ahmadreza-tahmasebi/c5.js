@@ -2,10 +2,10 @@
 
 
 function mergeSort(nums) {
-    if (nums.length == 0) {
+    if (nums.length === 0) {
         return []
     }
-    if (nums.length == 1)
+    if (nums.length === 1)
         return nums
     var firstPart = mergeSort(nums.slice(0, nums.length / 2));
     var secondPart = mergeSort(nums.slice(nums.length / 2));
@@ -20,15 +20,15 @@ function mergeSort(nums) {
             res.push(secondPart[secHead]);
             secHead++;
         }
-        if (firstHead == firstPart.length){
-            while(secHead != secondPart.length){
+        if (firstHead === firstPart.length){
+            while(secHead !== secondPart.length){
                 res.push(secondPart[secHead]);
                 secHead++;
             }
             break;
         }
-        if (secHead == secondPart.length){
-            while(firstHead != firstPart.length){
+        if (secHead === secondPart.length){
+            while(firstHead !== firstPart.length){
                 res.push(firstPart[firstHead]);
                 firstHead++;
             }
