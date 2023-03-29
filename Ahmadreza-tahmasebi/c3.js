@@ -10,11 +10,8 @@ function monthWeekDayCounter(year, month, day) {
     var todayMonth = today.getMonth() + 1;
     var todayday = today.getDate();
 
-    if ((year > todayYear) || ((year == todayYear) && month > (todayMonth)) || ((year == todayYear) && (month == todayMonth) && (day > todayday))) {
-        return ({
-            "error" : "birthday can not be in the future !",
-            "status" : "400"
-        })
+    if ((year > todayYear) || ((year === todayYear) && month > (todayMonth)) || ((year === todayYear) && (month === todayMonth) && (day > todayday))) {
+        return ("error : birthday can not be in the future !")
     }
 
     var todayTotalDays = convertDateToDaysAfterJesus(todayYear, todayMonth, todayday);
@@ -29,6 +26,9 @@ function monthWeekDayCounter(year, month, day) {
     })
 }
 
+
+var res = monthWeekDayCounter(2112,3,12);
+console.log(res)
 
 var res = monthWeekDayCounter(2002,3,12);
 console.log(res)
