@@ -31,5 +31,3 @@ oneSidePyramidMaker(6); // even
 
 pyramidMaker(5); // odd
 pyramidMaker(6); // even
-
-
