@@ -2,10 +2,7 @@
 
 function getMaxMin(...args) {
     if (args.length === 0){
-        return ({
-            "error" : "empty array !",
-            "status" : 400
-        })
+        return ("error : empty array !")
     }
     var min = Infinity;
     var max = -Infinity;
@@ -23,7 +20,6 @@ function getMaxMin(...args) {
     return ({
         "min" : min,
         "max" : max,
-        "status" : 200
     })
 }
 const res = getMaxMin(-1,-2,12,33,-5,34,104,-204,204,204);

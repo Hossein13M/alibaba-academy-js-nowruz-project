@@ -26,7 +26,6 @@ function monthWeekDayCounter(year, month, day) {
         "month" : totalMonthsBetween,
         "day" : totalDaysBetween,
         "week" : totalWeeksBetween,
-        "status" : "200"
     })
 }
 
