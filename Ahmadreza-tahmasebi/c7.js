@@ -56,7 +56,7 @@ function getAvailableFunctions() {
 function toggleStatus(itemName) {
     for(var item of products){
         if(item.name === itemName){
-            (item.isEnable) ? item.isEnable = false : item.isEnable = true ;
+            item.isEnable ? item.isEnable = false : item.isEnable = true ;
             return item;
         }
     }
