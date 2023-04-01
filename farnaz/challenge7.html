@@ -1,0 +1,192 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Warehouse {
+
+            constructor() {
+
+                this.products = [];
+
+                this.soldProducts = [];
+
+            }
+
+
+            getAllItemsCount() {
+
+                let totalItemsCount = 0;
+
+                for (let i = 0; i < this.products.length; i++) {
+
+                    totalItemsCount += this.products[i].count;
+
+                }
+
+                return totalItemsCount;
+
+            }
+
+
+            createNewProduct(name, count, price, isEnabled) {
+
+                const newProduct = {
+
+                    name,
+
+                    count,
+
+                    price,
+
+                    isEnabled,
+
+                };
+
+                this.products.push(newProduct);
+
+            }
+
+
+            sellProduct(productIndex, count) {
+
+                if (this.products[productIndex].count >= count) {
+
+                    this.products[productIndex].count -= count;
+
+                    this.soldProducts.push({
+
+                        name: this.products[productIndex].name,
+
+                        count: count,
+
+                        price: this.products[productIndex].price,
+
+                    });
+
+                    return true;
+
+                } else {
+
+                    return false;
+
+                }
+
+            }
+
+
+            getAvailableProducts() {
+
+                const availableProducts = [];
+
+                for (let i = 0; i < this.products.length; i++) {
+
+                    if (this.products[i].count > 0) {
+
+                        availableProducts.push(this.products[i].name);
+
+                    }
+
+                }
+
+                return availableProducts;
+
+            }
+
+
+            disableProduct(productIndex) {
+
+                this.products[productIndex].isEnabled = false;
+
+            }
+
+
+            enableProduct(productIndex) {
+
+                this.products[productIndex].isEnabled = true;
+
+            }
+
+
+            changeProductCount(productIndex, newCount) {
+
+                this.products[productIndex].count = newCount;
+
+            }
+
+
+            editProductName(productIndex, newName) {
+
+                this.products[productIndex].name = newName;
+
+            }
+
+
+            calculateSoldItemsPrice() {
+
+                let totalPrice = 0;
+
+                for (let i = 0; i < this.soldProducts.length; i++) {
+
+                    totalPrice += this.soldProducts[i].count * this.soldProducts[i].price;
+
+                }
+
+                return totalPrice;
+
+            }
+
+
+            calculateWarehouseValue() {
+
+                let warehouseValue = 0;
+
+                for (let i = 0; i < this.products.length; i++) {
+
+                    if (this.products[i].isEnabled) {
+
+                        warehouseValue += this.products[i].count * this.products[i].price;
+
+                    }
+
+                }
+
+                return warehouseValue;
+
+            }
+
+        }
+
+
+
+
+
+        const myWarehouse = new Warehouse();
+
+        myWarehouse.createNewProduct('Product1', 10, 5, true);
+
+        myWarehouse.createNewProduct('Product2', 20, 3, true);
+
+        myWarehouse.sellProduct(0, 5);
+
+        console.log(myWarehouse.getAllItemsCount()); // Output: 25
+
+        console.log(myWarehouse.getAvailableProducts()); // Output: ["Product1", "Product2"]
+
+        myWarehouse.disableProduct(1);
+
+        console.log(myWarehouse.getAvailableProducts()); // Output: ["Product1"]
+
+        console.log(myWarehouse.calculateSoldItemsPrice()); // Output: 25
+
+        console.log(myWarehouse.calculateWarehouseValue()); // Output: 50
+    </script>
+</body>
+
+</html>

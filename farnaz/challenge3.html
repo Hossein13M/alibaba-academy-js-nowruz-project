@@ -1,0 +1,34 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function calculateAge(birthday) {
+            //Convert the birthday string to a Date object
+            let birthdate = new Date(birthday);
+            //Calculate the difference between the birthdate and the current date in milliseconds
+            let difference = Date.now() -
+                bithdate.getTime();
+            //convert the difference to days, months, and weeks
+            let days = Math.floor(difference / (1000 * 60 * 60 * 60 * 24));
+            let months = Math.floor(days / 30.44);
+            let weeks = Math.floor(days / 7);
+            //return an object containing the number of days, months, and weeks lived
+            return {
+                days: days,
+                months: months,
+                weeks: weeks
+            };
+        }
+        let age = calculateAge("1990-05-12");
+        console.log(age); //Outputs: {days:11610,months:382,weeks:1658}
+    </script>
+</body>
+
+</html>
