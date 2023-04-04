@@ -1,17 +1,10 @@
 function convertRGBtoHex(...args) {
-  if (args.length !== 3) return "bad request!";
-  for (const arg of args) {
-    if (!isColorValid(arg)) return "bad request!";
-  }
+  if (!validationCheck(args)) return "bad request!";
   let result = "#";
   for (const arg of args) {
     result += decToHex(arg);
   }
   return result;
-}
-
-function isColorValid(colorCode) {
-  return typeof colorCode === "number" && colorCode >= 0 && colorCode <= 255;
 }
 
 function decToHex(colorCode) {
@@ -49,21 +42,37 @@ function decToHex(colorCode) {
   return hexCode.join("");
 }
 
+function validationCheck(args) {
+  if (!isCountOfColorsThree(args)) return false;
+  for (const colorNumber of args) {
+    if (!isColorNumberInRange(colorNumber)) return false;
+  }
+  return true;
+}
+
+function isCountOfColorsThree(args) {
+  if (args.length === 3) return true;
+  return false;
+}
+
+function isColorNumberInRange(colorNumber) {
+  return colorNumber >= 0 && colorNumber <= 255;
+}
+
 // test case for converting RGB to HEX format
 console.log(
-  "HEX code converted from RGB(0, 0, 0, 0)",
-  convertRGBtoHex(0, 0, 0, 0)
+  `HEX code converted from RGB(0, 0, 0, 0): ${convertRGBtoHex(0, 0, 0, 0)}`
 );
 console.log(
-  "HEX code converted from RGB('0', 0, 0)",
-  convertRGBtoHex("0", 0, 0)
+  `HEX code converted from RGB(255, 255, 256): ${convertRGBtoHex(
+    255,
+    255,
+    256
+  )}`
 );
 console.log(
-  "HEX code converted from RGB(255, 255, 256)",
-  convertRGBtoHex(255, 255, 256)
+  `HEX code converted from RGB(0, 0, 0): ${convertRGBtoHex(0, 0, 0)}`
 );
-console.log("HEX code converted from RGB(0, 0, 0)", convertRGBtoHex(0, 0, 0));
 console.log(
-  "HEX code converted from RGB(25, 56, 123)",
-  convertRGBtoHex(25, 56, 123)
+  `HEX code converted from RGB(25, 56, 123): ${convertRGBtoHex(25, 56, 123)}`
 );

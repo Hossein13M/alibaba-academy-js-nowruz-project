@@ -1,7 +1,7 @@
 const warehouse = Warehouse([]);
 
 function Product(id, name, price, count, sell = [], enable = true) {
-  if (count === 0) enable = false;
+  enable = isProductStockEmpty(count) ? false : enable;
   return {
     id,
     name,
@@ -25,30 +25,33 @@ function warehouseStock() {
 }
 
 function productStock(productId) {
-  if (!isTypeValid(productId, "number")) return "id should be a number!";
-  for (const product of warehouse) {
-    if (product.id === productId) {
-      return product;
-    }
-  }
+  if (isProductDataValid({ id: productId }) !== true)
+    return isProductDataValid({ id: productId });
+  let indexOfProduct = findProduct(productId);
+  if (indexOfProduct !== undefined)
+    return JSON.stringify(warehouse[indexOfProduct]);
   return `product ${productId} is not available!`;
 }
 
 function addNewProduct(product) {
-  if (findProduct(product.id)) return "id should be unique!";
+  if (isProductDataValid({ ...product }, "create") !== true)
+    return isProductDataValid({ ...product }, "create");
   warehouse.push(product);
   return product.name + " is added!";
 }
 
 function sellProduct(productId, count = 1) {
-  if (!isTypeValid(productId, "number")) return "id should be a number!";
-  if (!isTypeValid(count, "number")) return "count must be number!";
-  if (!isInRange(count, 0)) return "count is out of range!";
-  for (const product of warehouse) {
-    if (product.id === productId && product.enable && product.count >= count) {
-      product.count -= count;
-      product.sell.push({ count, price: product.price });
-      if (product.count === 0) product.enable = false;
+  if (isProductDataValid({ id: productId, count }) !== true)
+    return isProductDataValid({ id: productId, count });
+  let indexOfProduct = findProduct(productId);
+  if (indexOfProduct !== undefined) {
+    let product = warehouse[indexOfProduct];
+    if (product.enable && isInRange(product.count, count)) {
+      warehouse[indexOfProduct].count -= count;
+      warehouse[indexOfProduct].sell.push({ count, price: product.price });
+      warehouse[indexOfProduct].enable = isProductStockEmpty(product.count)
+        ? false
+        : product.enable;
       return `${count} ${product.name} sold!`;
     }
   }
@@ -56,65 +59,65 @@ function sellProduct(productId, count = 1) {
 }
 
 function availableProduct() {
-  return warehouse
-    .map((product) => {
-      return product.count > 0 && product;
-    })
-    .filter((product) => product);
+  return JSON.stringify(
+    warehouse
+      .map((product) => {
+        return product.count > 0 && product;
+      })
+      .filter((product) => product)
+  );
 }
 
 function changeProductMode(productId, enable) {
-  if (!isTypeValid(productId, "number")) return "id should be a number!";
-  if (typeof enable !== "undefined" && !isTypeValid(enable, "boolean"))
-    return "enable should be boolean";
-  for (const product of warehouse) {
-    if (product.id === productId) {
-      enable !== undefined
-        ? (product.enable = enable)
-        : (product.enable = !product.enable);
-      return `${product.name} ${product.enable ? "enabled" : "disabled"}!`;
-    }
+  if (isProductDataValid({ id: productId, enable }) !== true)
+    return isProductDataValid({ id: productId, enable });
+  let indexOfProduct = findProduct(productId);
+  if (indexOfProduct !== undefined) {
+    let product = warehouse[indexOfProduct];
+    enable !== undefined
+      ? (warehouse[indexOfProduct].enable = !product.enable)
+      : (warehouse[indexOfProduct].enable = enable);
+    return `${product.name} ${
+      warehouse[indexOfProduct].enable ? "enabled" : "disabled"
+    }!`;
   }
   return `product ${productId} is not available!`;
 }
 
 function changeProductCount(productId, count) {
-  if (!isTypeValid(productId, "number")) return "id should be a number!";
-  if (!isTypeValid(count, "number")) return "count must be number!";
-  if (!isInRange(count, 0)) return "count is out of range!";
-  for (const product of warehouse) {
-    if (product.id === productId) {
-      product.count = count;
-      return `count of ${product.name} changed to ${count}!`;
-    }
+  if (isProductDataValid({ id: productId, count }) !== true)
+    return isProductDataValid({ id: productId, count });
+  let indexOfProduct = findProduct(productId);
+  if (indexOfProduct !== undefined) {
+    warehouse[indexOfProduct].count = count;
+    return `count of ${warehouse[indexOfProduct].name} changed to ${count}!`;
   }
   return `product ${productId} is not available!`;
 }
 
 function findProduct(productId) {
-  if (!isTypeValid(productId, "number")) return "id should be a number!";
-  for (const product of warehouse) {
-    if (product.id === productId) {
-      return true;
+  if (isProductDataValid({ id: productId }) !== true)
+    return isProductDataValid({ id: productId });
+  for (const productIndex in warehouse) {
+    if (warehouse[productIndex].id === productId) {
+      return productIndex;
     }
   }
-  return false;
 }
 
 function editProduct(productId, newParams) {
-  if (!isTypeValid(productId, "number")) return "id should be a number!";
+  if (isProductDataValid({ ...newParams }, "edit") !== true)
+    return isProductDataValid({ ...newParams }, "edit");
   console.warn("warning: this function can change or delete important data!");
-  let { id, name, price, count, sell, enable } = newParams;
-  if (id) return "you can't change id";
-  for (const product of warehouse) {
-    if (product.id === productId) {
-      if (name) product.name = name;
-      if (price) product.price = price;
-      if (count) product.count = count;
-      if (sell) product.sell = sell;
-      if (enable) product.enable = enable;
-      return `product ${productId} changed!`;
-    }
+  let { name, price, count, sell, enable } = newParams;
+  let indexOfProduct = findProduct(productId);
+  if (indexOfProduct !== undefined) {
+    if (name !== undefined) warehouse[indexOfProduct].name = name;
+    if (price !== undefined) warehouse[indexOfProduct].price = price;
+    if (count !== undefined) warehouse[indexOfProduct].count = count;
+    if (sell !== undefined) warehouse[indexOfProduct].sell = sell;
+    if (enable !== undefined) warehouse[indexOfProduct].enable = enable;
+    return `product ${productId} changed!`;
   }
   return `product ${productId} is not available!`;
 }
@@ -130,15 +133,20 @@ function calcSoldProductsOfWarehouseValue() {
 }
 
 function calcSoldProductValue(productId) {
-  if (!isTypeValid(productId, "number")) return "id should be a number!";
+  if (isProductDataValid({ id: productId }) !== true)
+    return isProductDataValid({ id: productId });
   let total = 0;
-  for (const product of warehouse) {
-    if (product.id === productId) {
-      for (const soldData of product.sell) {
-        total += soldData.price * soldData.count;
-      }
-      return total;
+  const detailofSoldProduct = [];
+  let indexOfProduct = findProduct(productId);
+  if (indexOfProduct !== undefined) {
+    for (const soldData of warehouse[indexOfProduct].sell) {
+      detailofSoldProduct.push({
+        price: soldData.price,
+        count: soldData.count,
+      });
+      total += soldData.price * soldData.count;
     }
+    return JSON.stringify({ total, detailofSoldProduct });
   }
   return `product ${productId} is not available!`;
 }
@@ -151,23 +159,64 @@ function calcValueOfWarehouse() {
   return total;
 }
 
-function isTypeValid(value, trueType) {
-  if (typeof value === trueType) return true;
-  return false;
-}
 function isInRange(value, min = Infinity, max = Infinity) {
   return value >= min && value <= max;
 }
 
+function isProductStockEmpty(count) {
+  if (count === 0) return true;
+  return false;
+}
+
+function isProductDataValid({ ...params }, mode) {
+  let { id, name, price, count, enable } = params;
+  if (
+    mode === "create" &&
+    checkRequiredDataExists(id, name, price, count) !== true
+  )
+    return checkRequiredDataExists(id, name, price, count);
+  if (id !== undefined && isIdValid(id, mode) !== true)
+    return isIdValid(id, mode);
+  if (price !== undefined && isCountOrPriceValid(price) !== true)
+    return isCountOrPriceValid(price);
+  if (count !== undefined && isCountOrPriceValid(count) !== true)
+    return isCountOrPriceValid(count);
+  return true;
+}
+
+function isIdValid(id, mode) {
+  if (mode === "create" && findProduct(id)) return "id should be unique!";
+  if (mode === "edit") return "you can't change id!";
+  return true;
+}
+
+function isCountOrPriceValid(count) {
+  if (!isInRange(count, 0)) return "count or price is out of range!";
+  return true;
+}
+
+function checkRequiredDataExists(id, name, price, count) {
+  if (
+    id === undefined ||
+    name === undefined ||
+    price === undefined ||
+    count === undefined
+  )
+    return "some data missed!";
+  return true;
+}
+
 // test case
-console.log(addNewProduct(Product(1, "product1", 100, 100)));
+console.log(addNewProduct(Product(1)));
 console.log(addNewProduct(Product(1, "product1", 100, 100)));
 console.log(addNewProduct(Product(2, "product2", 10, 5, [], false)));
 console.log(addNewProduct(Product(3, "product3", 110, 10)));
 console.log(addNewProduct(Product(4, "product4", 120, 10)));
 console.log(addNewProduct(Product(5, "product5", 150, 1)));
 console.log(addNewProduct(Product(7, "product7", 150, 0)));
-console.log(`count of all the items in the warehouse combined: ${warehouseStock()}`);
+console.log(
+  `count of all the items in the warehouse combined: ${warehouseStock()}`
+);
 console.log(addNewProduct(Product(6, "product6", 100, 100)));
 console.log(`product 2: ${productStock(2)}`);
 console.log(`requesting 5 item of product 2: ${sellProduct(2, 5)}`);
@@ -180,14 +229,23 @@ console.log(editProduct(1, { price: 30 }));
 console.log(`requesting 10 item of product 1: ${sellProduct(1, 10)}`);
 console.log(changeProductMode(4, false));
 console.log(changeProductMode(4, true));
-console.log(changeProductMode(4, "true"));
 console.log(changeProductMode(4));
 console.log(`available products: ${availableProduct()}`);
 console.log(changeProductCount(8, 10));
 console.log(changeProductCount(3, 10));
 console.log(editProduct(3, { name: "product-3", price: 20, count: 5 }));
 console.log(editProduct(3, { id: 10, name: "product-10" }));
-console.log(`price of all the items that have been sold: ${calcSoldProductsOfWarehouseValue()}`);
-console.log(`price of product1 that have been sold: ${calcSoldProductValue(1)}`);
+console.log(
+  `price of all the items that have been sold: ${calcSoldProductsOfWarehouseValue()}`
+);
+console.log(
+  `price of product1 that have been sold: ${calcSoldProductValue(1)}`
+);
+console.log(
+  `price of product5 that have been sold: ${calcSoldProductValue(5)}`
+);
+console.log(
+  `price of product5 that have been sold: ${calcSoldProductValue(2)}`
+);
 console.log(`warehouse's value: ${calcValueOfWarehouse()}`);
 console.log(warehouse);

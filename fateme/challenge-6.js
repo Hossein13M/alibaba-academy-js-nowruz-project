@@ -1,11 +1,11 @@
 function pyramid(n = 5) {
   for (let index = 1; index <= n; index++) {
-    const line = []
+    const line = [];
     for (let j = 1; j <= n - index; j++) {
-      line.push(" ")
+      line.push(" ");
     }
     for (let k = 1; k <= 2 * index - 1; k++) {
-      line.push("*")
+      line.push("*");
     }
     console.log(line.join(""));
   }
