@@ -19,8 +19,8 @@ function getAllCounts() {
 }
 
 // 2
-function newItem(name,count){
-    const item = Product(name, count, 0)
+function newItem(name,count, newItem=0){
+    const item = Product(name, count, newItem)
     products.push(item)
     return item;
 }
