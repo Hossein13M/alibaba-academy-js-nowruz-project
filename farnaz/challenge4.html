@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function findMinMax(numbers) {
+            //Initialize variable to hold the minimum and maximum values
+            let min = numbers[0];
+            let max = numbers[0];
+            //Loop through the array and update the minimum and maximum values as necessary
+            for (let i = 1; i < numbers.length; i++) {
+                if (numbers[i] < min) {
+                    min = numbers[i];
+                }
+                if (numbers[i] > max) {
+                    max = numbers[i];
+                }
+            }
+            //Return an object containing the minimum and maximum values
+            return { min: min, max: max };
+        }
+
+    </script>
+</body>
+
+</html>

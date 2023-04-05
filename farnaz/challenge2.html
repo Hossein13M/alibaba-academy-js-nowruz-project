@@ -1,0 +1,24 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //convert color numbers from RGB into HEX code
+        function rgbToHex(red, green, blue) {
+            //convert each color component to a 2-digit hex string and concatenate them
+            const hexString = ((red << 16) + (green << 8) + blue).toString(16).padStart(6, '0');
+            //prepend a pound sign to the hex string to make it a valid css color code
+            return '#' + hexString;
+        }
+        const hexcolor = rgbToHex(255, 165, 0);
+        console.log(hexColor); //outputs "#ffa500"
+    </script>
+</body>
+
+</html>
