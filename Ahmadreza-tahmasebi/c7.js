@@ -1,5 +1,6 @@
 function Product(itemName, count, price, isEnable=true) {
     return({
+        "id" : products.length + 1,
         "name" : itemName,
         "count" : count,
         "price" : price,
@@ -26,10 +27,10 @@ function newItem(name,count, newItem=0){
 }
 
 // 3
-function sell(itemName){
+function sell(itemName, id=-1){
     for(let item of products){
-        if (item.name === itemName){
-            if (item.count === 0) {
+        if (item.name === itemName || item.id === id){
+            if (item.count) {
                 return "can't sell a product with 0 count"
             }else{
                 soldItems.push(item)
@@ -53,9 +54,9 @@ function getAvailableFunctions() {
 }
 
 // 5
-function toggleStatus(itemName) {
+function toggleStatus(itemName, id=-1) {
     for(let item of products){
-        if(item.name === itemName){
+        if(item.name === itemName || item.id === id){
             item.isEnable ? item.isEnable = false : item.isEnable = true ;
             return item;
         }
@@ -63,9 +64,9 @@ function toggleStatus(itemName) {
 }
 
 // 6
-function newCount(itemName, newCount){
+function newCount(itemName, newCount, id=-1){
     for(let item of products){
-        if(item.name === itemName){
+        if(item.name === itemName || item.id === id){
             item.count = newCount;
             return item;
         }
@@ -73,9 +74,9 @@ function newCount(itemName, newCount){
 }
 
 // 7
-function editItemName(itemName, newItemName) {
+function editItemName(itemName, newItemName, id=-1) {
     for(let item of products){
-        if(item.name === itemName){
+        if(item.name === itemName || item.id === id){
             item.name = newItemName;
             return item;
         }
