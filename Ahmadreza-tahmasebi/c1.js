@@ -3,10 +3,11 @@
 // solution 1
 
 function printAllPrimes(){
-    var primes = []
-    for(var i = 2 ; i <= 100 ; i++){
+    const primes = []
+    let j = 0;
+    for(let i = 2 ; i <= 100 ; i++){
         console.log(`analysing ${i}`);
-        for(var j = 2 ; j < i ; j++){
+        for(j = 2 ; j < i ; j++){
             if (i % j == 0){
                 console.log(`${i} is not prime because of : ${i} % ${j} == 0`);
                 break;
@@ -20,7 +21,7 @@ function printAllPrimes(){
     return primes;
 }
 
-var primes = printAllPrimes()
-for(var prime of primes){
+const primes = printAllPrimes()
+for(let prime of primes){
     console.log(prime)
 }

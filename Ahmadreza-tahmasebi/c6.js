@@ -1,8 +1,8 @@
 "use strict"
 
 function oneSidePyramidMaker(num){
-    for(var i = 1 ; i <= num ; i++){
-        for(var j = 1 ; j <= (i * 2) - 1 ; j++){
+    for(let i = 1 ; i <= num ; i++){
+        for(let j = 1 ; j <= (i * 2) - 1 ; j++){
             process.stdout.write("*");
         }
         console.log();
@@ -10,10 +10,10 @@ function oneSidePyramidMaker(num){
 }
 
 function pyramidMaker(num) {
-    var middle = Math.ceil(((num * 2)-1 )/ 2)
-    var temp = [middle]
-    for(var i = 1 ; i <= num ; i++){
-        for (var j = 1 ; j <= (num * 2)-1 ; j++){
+    const middle = Math.ceil(((num * 2)-1 )/ 2)
+    const temp = [middle]
+    for(let i = 1 ; i <= num ; i++){
+        for (let j = 1 ; j <= (num * 2)-1 ; j++){
             if (temp.includes(j)){
                 process.stdout.write("*");
             }else{

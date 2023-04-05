@@ -10,8 +10,8 @@ function Product(itemName, count, price, isEnable=true) {
 
 // 1
 function getAllCounts() {
-    var res = [];
-    for(var item of products){
+    const res = [];
+    for(let item of products){
         console.log(`${item.name} : ${item.count}`);
         res.push(`${item.name} : ${item.count}`);
     }
@@ -20,14 +20,14 @@ function getAllCounts() {
 
 // 2
 function newItem(name,count){
-    var item = Product(name, count, 0)
+    const item = Product(name, count, 0)
     products.push(item)
     return item;
 }
 
 // 3
 function sell(itemName){
-    for(var item of products){
+    for(let item of products){
         if (item.name === itemName){
             if (item.count === 0) {
                 return "can't sell a product with 0 count"
@@ -42,8 +42,8 @@ function sell(itemName){
 
 // 4
 function getAvailableFunctions() {
-    var res = []
-    for(var item of products){
+    const res = []
+    for(let item of products){
         if (item.count === 0 ){
             continue;
         }
@@ -54,7 +54,7 @@ function getAvailableFunctions() {
 
 // 5
 function toggleStatus(itemName) {
-    for(var item of products){
+    for(let item of products){
         if(item.name === itemName){
             item.isEnable ? item.isEnable = false : item.isEnable = true ;
             return item;
@@ -64,7 +64,7 @@ function toggleStatus(itemName) {
 
 // 6
 function newCount(itemName, newCount){
-    for(var item of products){
+    for(let item of products){
         if(item.name === itemName){
             item.count = newCount;
             return item;
@@ -74,7 +74,7 @@ function newCount(itemName, newCount){
 
 // 7
 function editItemName(itemName, newItemName) {
-    for(var item of products){
+    for(let item of products){
         if(item.name === itemName){
             item.name = newItemName;
             return item;
@@ -84,8 +84,8 @@ function editItemName(itemName, newItemName) {
 
 // 8
 function calculateEarnedMoney() {
-    var sum = 0;
-    for(var item of soldItems){
+    let sum = 0;
+    for(let item of soldItems){
         sum = sum + item.price;
     }
     return sum;
@@ -93,15 +93,15 @@ function calculateEarnedMoney() {
 
 // 9
 function getWarehouseValue(){
-    var sum = 0;
-    for(var item of products){
+    let sum = 0;
+    for(let item of products){
         sum = sum + item.price;
     }
     return sum;
 }
 
-let products = []
-let soldItems = []
+const products = []
+const soldItems = []
 products.push(Product("item 1", 12, 4_000))
 getAllCounts()
 console.log("---------------------------")

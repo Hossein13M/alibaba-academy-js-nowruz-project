@@ -7,11 +7,11 @@ function mergeSort(nums) {
     }
     if (nums.length === 1)
         return nums
-    var firstPart = mergeSort(nums.slice(0, nums.length / 2));
-    var secondPart = mergeSort(nums.slice(nums.length / 2));
-    var res = []
-    var firstHead = 0;
-    var secHead = 0;
+    let firstPart = mergeSort(nums.slice(0, nums.length / 2));
+    let secondPart = mergeSort(nums.slice(nums.length / 2));
+    const res = []
+    let firstHead = 0;
+    let secHead = 0;
     while(1){
         if (firstPart[firstHead] < secondPart[secHead]){
             res.push(firstPart[firstHead]);
@@ -38,5 +38,5 @@ function mergeSort(nums) {
     return res;
 }
 
-var a = [1,2,3,5,4,3,2,1]
+const a = [1,2,3,5,4,3,2,1]
 console.log(mergeSort(a));
