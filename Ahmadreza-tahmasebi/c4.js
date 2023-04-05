@@ -1,7 +1,7 @@
 "use strict"
 
 function getMaxMin(...args) {
-    if (args.length === 0){
+    if (args.length){
         return ("error : empty array !")
     }
     let min = args[0];
