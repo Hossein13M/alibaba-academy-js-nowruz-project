@@ -64,7 +64,7 @@ let products = [
   }
   console.log(availableListItems());
   
-  //* 5 :(
+  //* 5
   
   
   
