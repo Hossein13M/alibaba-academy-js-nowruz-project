@@ -1,9 +1,9 @@
 // number one
 const products = [
-  { name: "Product 1", count: 10, price: 100 },
-  { name: "Product 2", count: 5, price: 50 },
-  { name: "Product 3", count: 20, price: 200 },
-  { name: "Product 5", count: 0, price: 50 },
+  { name: "Product 1", count: 10, price: 100 ,exist:true},
+  { name: "Product 2", count: 5, price: 50 ,exist:true},
+  { name: "Product 3", count: 20, price: 200 ,exist:true},
+  { name: "Product 5", count: 0, price: 50 ,exist:false},
 
 ];
 
@@ -34,23 +34,23 @@ function createNewItem(name, count, price) {
 createNewItem("Product 4", 15, 150);
 //   number three
 function getAvailableItems() {
-  console.log(products.filter((product) => product.count > 0)); 
+  console.log(products.filter((product) => product.exist )); 
 }
 
 getAvailableItems();
 //   number four
 function enableItem(name) {
-  const item = products.find((product) => product.name === name);
+  const item = products.find((product) => product.exist);
   if (item) {
-    item.count = 1;
+    item.exist = true;
     return item;
   }
 }
 
 function disableItem(name) {
-  const item = products.find((product) => product.name === name);
+  const item = products.find((product) => product.exist);
   if (item) {
-    item.count = 0;
+    item.exist = false;
     return item;
   }
 }
@@ -65,6 +65,9 @@ function changeItemCount(name, newCount) {
   if (item) {
     item.count = newCount;
     return item;
+  }else{
+    console.log("product not found");
+
   }
 }
 
@@ -78,11 +81,14 @@ function editItem(name, newName, newCount, newPrice) {
     item.name = newName;
     item.count = newCount;
     item.price = newPrice;
-    return item;
+    return item
+  }else{
+    console.log("product not found");
   }
+
 }
 
-console.log(editItem("Product 2", "New Product 2", 8, 80));
+editItem("Product 9", "New Product 2", 8, 80);
 
 //   number seven
 
